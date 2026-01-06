@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coffee Bean ☕
 
-## Getting Started
+Next.js、Tailwind CSS、GSAP、Three.jsを使用したモダンなWebプロジェクト。
 
-First, run the development server:
+## 🚀 技術スタック
+
+- **[Next.js 16](https://nextjs.org)** - React フレームワーク
+- **[TypeScript](https://www.typescriptlang.org/)** - 型安全な開発
+- **[Tailwind CSS v4](https://tailwindcss.com)** - ユーティリティファーストのCSSフレームワーク
+- **[GSAP](https://greensock.com/gsap/)** - 高性能なアニメーションライブラリ
+- **[Three.js](https://threejs.org/)** - 3Dグラフィックスライブラリ
+
+## 📦 セットアップ
+
+依存関係をインストール：
+
+```bash
+npm install
+```
+
+## 🛠️ 開発
+
+開発サーバーを起動：
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`app/page.tsx` を編集すると、ページが自動的に更新されます。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 サンプルコンポーネント
 
-## Learn More
+プロジェクトには、すべての技術スタックを使用したサンプルコンポーネントが含まれています：
 
-To learn more about Next.js, take a look at the following resources:
+- `app/components/AnimatedCube.tsx` - Three.jsとGSAPを組み合わせた3Dアニメーションキューブ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 主な機能
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ✅ Next.js App Router
+- ✅ TypeScript による型安全性
+- ✅ Tailwind CSS によるレスポンシブデザイン
+- ✅ GSAP による滑らかなアニメーション
+- ✅ Three.js による3Dグラフィックス
+- ✅ ダークモード対応
 
-## Deploy on Vercel
+## 🏗️ ビルド
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+本番用にビルド：
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+本番サーバーを起動：
+
+```bash
+npm start
+```
+
+## 📚 参考資料
+
+- [Next.js ドキュメント](https://nextjs.org/docs)
+- [Tailwind CSS ドキュメント](https://tailwindcss.com/docs)
+- [GSAP ドキュメント](https://greensock.com/docs/)
+- [Three.js ドキュメント](https://threejs.org/docs/)
+
+## 📄 ライセンス
+
+MIT
