@@ -3,32 +3,19 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { IconCrop, IconHive, IconToast } from "./components/svg-assets";
 import CoffeeBeanScene from "./components/CoffeeBeanScene";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   return (
-    <div className="bg-[#241501] flex flex-col items-start relative min-h-screen w-full">
+    <div className="bg-[#594a3c] flex flex-col items-start relative min-h-screen w-full">
       {/* Navbar */}
-      <nav className="bg-[#594a3c] flex flex-col items-center w-full">
-        <div className="flex h-[72px] items-center justify-between px-16 md:px-[64px] w-full max-w-[1408px]">
-          <div className="flex items-center justify-between w-full">
-            <Link href="/" className="h-[25px] w-[116px]">
-              <Image
-                src="/logo.svg"
-                alt="COFFEE"
-                width={116}
-                height={25}
-                className="h-full w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* 3D Coffee Bean Scene - Fixed position, follows scroll */}
       <CoffeeBeanScene />
 
       {/* Hero Section */}
-      <section className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 relative z-10">
+      <section className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 relative z-10 mt-[72px]">
         <div className="flex items-start justify-center w-full max-w-[1280px]">
           <div className="flex flex-col gap-2 h-[640px] items-center justify-center overflow-hidden rounded-[80px] w-full relative bg-linear-to-b from-[#f5f5dc] to-[#e8dcc0]">
             {/* Title - Center Top */}

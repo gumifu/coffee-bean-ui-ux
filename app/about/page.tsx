@@ -1,29 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Mountain, Flower, Coffee, Trophy } from "lucide-react";
+import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#241501] flex flex-col items-start relative min-h-screen w-full">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="bg-[#594a3c] flex flex-col items-start relative min-h-screen w-full"
+    >
       {/* Navbar */}
-      <nav className="bg-[#594a3c] flex flex-col items-center w-full">
-        <div className="flex h-[72px] items-center justify-between px-16 md:px-[64px] w-full max-w-[1408px]">
-          <div className="flex items-center justify-between w-full">
-            <Link href="/" className="h-[25px] w-[116px]">
-              <Image
-                src="/logo.svg"
-                alt="COFFEE"
-                width={116}
-                height={25}
-                className="h-full w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Header Section */}
-      <section className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20">
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 mt-[72px]"
+      >
         <div className="flex flex-col h-[640px] items-center justify-center px-0 py-20 rounded-[80px] w-full relative overflow-hidden max-w-[1280px]">
           {/* Background with opacity */}
           <div className="absolute inset-0 bg-[rgba(255,255,255,0.8)] rounded-[80px]" />
@@ -49,14 +49,26 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Cards Section */}
-      <section className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20 md:py-28">
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20 md:py-28"
+      >
         <div className="flex flex-col items-center max-w-[1280px] w-full">
           <div className="flex flex-col md:flex-row gap-8 md:gap-8 items-start w-full">
             {/* Arabica Card */}
-            <div className="bg-white border border-solid border-black flex flex-col items-start overflow-hidden rounded-[80px] w-full md:flex-1">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white border border-solid border-black flex flex-col items-start overflow-hidden rounded-[80px] w-full md:flex-1"
+            >
               <div className="flex flex-col items-start px-6 md:px-12 py-12 md:py-20 w-full">
                 <div className="flex flex-col gap-6 items-start w-full">
                   <h3 className="font-semibold text-[40px] leading-relaxed text-black">
@@ -130,10 +142,16 @@ export default function AboutPage() {
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Robusta Card */}
-            <div className="bg-white border border-solid border-black flex flex-col items-start overflow-hidden rounded-[80px] w-full md:flex-1">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white border border-solid border-black flex flex-col items-start overflow-hidden rounded-[80px] w-full md:flex-1"
+            >
               <div className="flex flex-col items-start px-6 md:px-12 py-12 md:py-20 w-full">
                 <div className="flex flex-col gap-6 items-start w-full">
                   <h3 className="font-semibold text-[40px] leading-relaxed text-black">
@@ -207,13 +225,19 @@ export default function AboutPage() {
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
-      <footer className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20">
+      <motion.footer
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20"
+      >
         <div className="flex flex-col items-start max-w-[1280px] w-full">
           <div className="flex items-center justify-between w-full">
             <Link href="/" className="h-[25px] w-[116px]">
@@ -232,7 +256,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </motion.footer>
+    </motion.div>
   );
 }
