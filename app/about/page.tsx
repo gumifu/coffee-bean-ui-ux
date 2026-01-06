@@ -1,43 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Mountain,
-  Flower,
-  Coffee,
-  Trophy,
-} from "lucide-react";
+import { Mountain, Flower, Coffee, Trophy } from "lucide-react";
 
 export default function AboutPage() {
   return (
     <div className="bg-[#241501] flex flex-col items-start relative min-h-screen w-full">
       {/* Navbar */}
       <nav className="bg-[#594a3c] flex flex-col items-center w-full">
-        <div className="flex h-[72px] items-center justify-between px-6 md:px-16 w-full max-w-[1408px]">
+        <div className="flex h-[72px] items-center justify-between px-16 md:px-[64px] w-full max-w-[1408px]">
           <div className="flex items-center justify-between w-full">
-            <Link href="/" className="h-[23px] w-[88px] text-white font-bold text-lg">
-              COFFEE
+            <Link href="/" className="h-[25px] w-[116px]">
+              <Image
+                src="/logo.svg"
+                alt="COFFEE"
+                width={116}
+                height={25}
+                className="h-full w-auto"
+              />
             </Link>
-            <div className="flex gap-4 items-center">
-              <Link
-                href="/about"
-                className="border border-solid border-white px-5 py-2 text-white font-normal text-base hover:bg-white hover:text-[#594a3c] transition-colors"
-              >
-                Learn
-              </Link>
-              <Link
-                href="/"
-                className="bg-white border border-solid border-white px-5 py-2 text-[#594a3c] font-normal text-base hover:bg-[#594a3c] hover:text-white transition-colors"
-              >
-                Brew
-              </Link>
-            </div>
           </div>
         </div>
       </nav>
 
       {/* Header Section */}
       <section className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20">
-        <div className="flex flex-col h-[640px] items-center justify-center px-0 py-20 rounded-[80px] w-full relative overflow-hidden">
+        <div className="flex flex-col h-[640px] items-center justify-center px-0 py-20 rounded-[80px] w-full relative overflow-hidden max-w-[1280px]">
           {/* Background with opacity */}
           <div className="absolute inset-0 bg-[rgba(255,255,255,0.8)] rounded-[80px]" />
           <div className="absolute inset-0 opacity-10 rounded-[80px] overflow-hidden">
@@ -91,35 +78,49 @@ export default function AboutPage() {
                     <div className="flex gap-3 items-start">
                       <Mountain size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-sm text-black">Growing area</p>
-                        <p className="font-normal text-sm text-black">High-altitude mountains</p>
+                        <p className="font-semibold text-sm text-black">
+                          Growing area
+                        </p>
+                        <p className="font-normal text-sm text-black">
+                          High-altitude mountains
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-start">
                       <Flower size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-sm text-black">Flavor</p>
-                        <p className="font-normal text-sm text-black">Smooth, aromatic, mild acidity</p>
+                        <p className="font-semibold text-sm text-black">
+                          Flavor
+                        </p>
+                        <p className="font-normal text-sm text-black">
+                          Smooth, aromatic, mild acidity
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-start">
                       <Coffee size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-sm text-black">Caffeine</p>
-                        <p className="font-normal text-sm text-black">Lower caffeine</p>
+                        <p className="font-semibold text-sm text-black">
+                          Caffeine
+                        </p>
+                        <p className="font-normal text-sm text-black">
+                          Lower caffeine
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-start">
                       <Trophy size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
                         <p className="font-semibold text-sm text-black">Use</p>
-                        <p className="font-normal text-sm text-black">Specialty coffee, filter</p>
+                        <p className="font-normal text-sm text-black">
+                          Specialty coffee, filter
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col h-[360px] items-center justify-end relative w-full">
+              <div className="flex flex-col h-[300px] items-center justify-end relative w-full">
                 <div className="relative w-full h-full">
                   <Image
                     src="/216b34d9806cdc994789f03549d5f779fca7a73c.png"
@@ -154,35 +155,49 @@ export default function AboutPage() {
                     <div className="flex gap-3 items-start">
                       <Mountain size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-sm text-black">Growing area</p>
-                        <p className="font-normal text-sm text-black">Warm, low-altitude regions</p>
+                        <p className="font-semibold text-sm text-black">
+                          Growing area
+                        </p>
+                        <p className="font-normal text-sm text-black">
+                          Warm, low-altitude regions
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-start">
                       <Flower size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-sm text-black">Flavor</p>
-                        <p className="font-normal text-sm text-black">Strong, bitter, earthy</p>
+                        <p className="font-semibold text-sm text-black">
+                          Flavor
+                        </p>
+                        <p className="font-normal text-sm text-black">
+                          Strong, bitter, earthy
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-start">
                       <Coffee size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-sm text-black">Caffeine</p>
-                        <p className="font-normal text-sm text-black">Higher caffeine</p>
+                        <p className="font-semibold text-sm text-black">
+                          Caffeine
+                        </p>
+                        <p className="font-normal text-sm text-black">
+                          Higher caffeine
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-3 items-start">
                       <Trophy size={24} className="shrink-0 text-black" />
                       <div className="flex flex-col gap-1">
                         <p className="font-semibold text-sm text-black">Use</p>
-                        <p className="font-normal text-sm text-black">Espresso, blends</p>
+                        <p className="font-normal text-sm text-black">
+                          Espresso, blends
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col h-[360px] items-center justify-end relative w-full">
+              <div className="flex flex-col h-[300px] items-center justify-end relative w-full">
                 <div className="relative w-full h-full">
                   <Image
                     src="/c5f8246aa367081ff392e01baec4c12de097fab5.png"
@@ -201,8 +216,14 @@ export default function AboutPage() {
       <footer className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20">
         <div className="flex flex-col items-start max-w-[1280px] w-full">
           <div className="flex items-center justify-between w-full">
-            <Link href="/" className="h-[23px] w-[88px] text-white font-bold text-lg">
-              COFFEE
+            <Link href="/" className="h-[25px] w-[116px]">
+              <Image
+                src="/logo.svg"
+                alt="COFFEE"
+                width={116}
+                height={25}
+                className="h-full w-auto"
+              />
             </Link>
             <div className="flex items-center">
               <p className="font-normal text-sm text-white">
@@ -215,4 +236,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { IconCrop, IconHive, IconToast } from "./components/svg-assets";
 import CoffeeBeanScene from "./components/CoffeeBeanScene";
 
@@ -10,9 +11,15 @@ export default function Home() {
       <nav className="bg-[#594a3c] flex flex-col items-center w-full">
         <div className="flex h-[72px] items-center justify-between px-16 md:px-[64px] w-full max-w-[1408px]">
           <div className="flex items-center justify-between w-full">
-            <div className="h-[23px] w-[88px] text-white font-bold text-lg">
-              COFFEE
-            </div>
+            <Link href="/" className="h-[25px] w-[116px]">
+              <Image
+                src="/logo.svg"
+                alt="COFFEE"
+                width={116}
+                height={25}
+                className="h-full w-auto"
+              />
+            </Link>
           </div>
         </div>
       </nav>
@@ -88,11 +95,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center">
-                <button className="border border-solid border-white px-6 py-3 text-white font-normal text-base hover:bg-white hover:text-[#594a3c] transition-colors">
-                  Explore
-                </button>
-              </div>
             </div>
 
             {/* Image Container */}
@@ -165,9 +167,13 @@ export default function Home() {
             <div className="absolute left-0 right-0 top-[100px] z-10 text-center">
               <Link
                 href="/about"
-                className="inline-block border border-solid border-black px-6 py-3 text-black font-normal text-base hover:bg-black hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 border border-solid border-black px-6 py-3 text-black font-normal text-base hover:bg-black hover:text-white transition-colors group"
               >
-                About Two Beans
+                <span>About Two Beans</span>
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
               </Link>
             </div>
           </div>
