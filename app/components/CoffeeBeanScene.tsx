@@ -22,24 +22,39 @@ export default function CoffeeBeanScene() {
 
     const container = containerRef.current;
 
+    // モバイル判定
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
     // シーンのセットアップ
     const scene = new THREE.Scene();
 
+    // FOVを画面サイズに応じて調整
+    const fov = isMobile ? 35 : isTablet ? 32 : 30;
+
     const camera = new THREE.PerspectiveCamera(
-      35,
+      fov,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.set(0, 0, 8);
+
+    // カメラのz位置を画面サイズに応じて調整
+    const cameraZ = isMobile ? 10 : isTablet ? 9 : 8;
+    camera.position.set(0, 0, cameraZ);
+
+    // About Two Beansボタンの位置にlookAtを設定
+    const targetY = -0.3; // ボタン位置に合わせたY座標
+    camera.lookAt(0, targetY, 0);
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: !isMobile, // モバイルではアンチエイリアスを無効化してパフォーマンス向上
       alpha: true,
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // モバイルではピクセル比を制限
+    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0); // 透明背景
     renderer.shadowMap.enabled = true; // シャドウを有効化
     renderer.shadowMap.type = THREE.PCFSoftShadowMap; // ソフトシャドウ
@@ -58,10 +73,12 @@ export default function CoffeeBeanScene() {
     directionalLight1.shadow.camera.right = 10;
     directionalLight1.shadow.camera.top = 10;
     directionalLight1.shadow.camera.bottom = -10;
-    directionalLight1.shadow.mapSize.width = 2048;
-    directionalLight1.shadow.mapSize.height = 2048;
+    // モバイルではシャドウマップ解像度を下げてパフォーマンス向上
+    const shadowMapSize = isMobile ? 1024 : 2048;
+    directionalLight1.shadow.mapSize.width = shadowMapSize;
+    directionalLight1.shadow.mapSize.height = shadowMapSize;
     directionalLight1.shadow.bias = -0.0005;
-    directionalLight1.shadow.radius = 3; // ソフトシャドウ
+    directionalLight1.shadow.radius = isMobile ? 2 : 3; // ソフトシャドウ
     scene.add(directionalLight1);
 
     const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.6);
@@ -98,9 +115,11 @@ export default function CoffeeBeanScene() {
         model.position.sub(center);
         model.position.y = -0.5; // 少し下に配置して影に近づける
 
-        // スケール調整（必要に応じて）
+        // スケール調整（画面サイズに応じて）
         const maxSize = Math.max(size.x, size.y, size.z);
-        const scale = 3 / maxSize;
+        const baseScale = 3 / maxSize;
+        // モバイルでは少し小さくする
+        const scale = isMobile ? baseScale * 0.9 : baseScale;
         model.scale.setScalar(scale);
 
         // 影を有効化
@@ -120,6 +139,9 @@ export default function CoffeeBeanScene() {
 
         // --- アニメーションの統合管理 (gsap.timeline) ---
 
+        // カメラの移動量を画面サイズに応じて調整
+        const cameraMoveAmount = isMobile ? 1.5 : isTablet ? 1.75 : 2;
+
         // 1. カメラの動き (左右の構図変更)
         const camTL = gsap.timeline({
           scrollTrigger: {
@@ -132,10 +154,9 @@ export default function CoffeeBeanScene() {
 
         camTL
           .to(camera.position, { x: 0, duration: 2 }) // ヒーロー (中央)
-          .to(camera.position, { x: -2, duration: 3 }) // Origins (右側に配置 = カメラ左)
-          .to(camera.position, { x: 2, duration: 4 }) // Culture (左側に配置 = カメラ右)
-          .to(camera.position, { x: 0, duration: 3 }); // About Two Beans (中央に戻る)
-        // .to(camera.position, { x: 0, duration: 2 }); // 余韻 (フッター)
+          .to(camera.position, { x: -cameraMoveAmount, duration: 3 }) // Origins (豆を右へ = カメラ左)
+          .to(camera.position, { x: cameraMoveAmount, duration: 4 }) // Culture (豆を左へ = カメラ右)
+          .to(camera.position, { x: 0, duration: 3 }); // Aboutセクションで中央へ
 
         // 2. 豆の回転 (見せたい角度の切り替え)
         const rotationTL = gsap.timeline({
@@ -148,35 +169,23 @@ export default function CoffeeBeanScene() {
         });
 
         rotationTL
-          .to(model.rotation, { x: 0.1, y: 0, z: 0, duration: 2 }) // ヒーロー (正面)
+          .to(model.rotation, { x: 0.1, y: 0, z: 0, duration: 2 })
           .to(model.rotation, {
             x: Math.PI / 2 - 0.05,
             y: -0.1,
-            z: -0.1, // zを抑えて酔いを軽減
+            z: -0.1,
             duration: 3,
-          }) // Origins
+          })
           .to(model.rotation, {
             x: Math.PI / 2 + 0.1,
             y: 0.2,
             z: 0.15,
             duration: 4,
-          }) // Culture
-          .to(model.rotation, {
-            x: Math.PI * 2,
-            y: 0,
-            z: 0,
-            duration: 3,
-          }); // About Two Beans (正面に戻る)
-        // .to(model.rotation, {
-        //   x: Math.PI * 2,
-        //   y: 0.1,
-        //   z: 0.1,
-        //   duration: 2,
-        // }); // ラスト (少し傾ける)
+          })
+          .to(model.rotation, { x: Math.PI * 2, y: 0, z: 0, duration: 3 });
 
-        // 3. 全体的な浮遊感とスケール
-        gsap.to(model.position, {
-          y: 0.1,
+        // 3. 全体的な浮遊感と「影への着地」
+        const positionTL = gsap.timeline({
           scrollTrigger: {
             trigger: "body",
             start: "top top",
@@ -185,17 +194,33 @@ export default function CoffeeBeanScene() {
           },
         });
 
-        gsap.to(model.scale, {
-          x: scale * 0.5,
-          y: scale * 0.5,
-          z: scale * 0.5,
+        positionTL
+          .to(model.position, { y: 0.1, duration: 9 }) // 途中までは浮かせたまま
+          .to(model.position, { y: -0.5, duration: 3 }); // 最後は初期位置の -0.5 に戻して影に付ける
+
+        // 4. スケールのアニメーション (元の大きさに戻す)
+        const scaleTL = gsap.timeline({
           scrollTrigger: {
             trigger: "body",
-            start: "5% top",
-            end: "80% top",
+            start: "top top",
+            end: "bottom bottom",
             scrub: 1,
           },
         });
+
+        scaleTL
+          .to(model.scale, {
+            x: scale * 0.5,
+            y: scale * 0.5,
+            z: scale * 0.5,
+            duration: 10,
+          }) // 途中で少し小さく
+          .to(model.scale, { x: scale, y: scale, z: scale, duration: 4 }); // 最後は元の大きさに戻す
+
+        // DOMが完全に読み込まれた後にScrollTriggerをリフレッシュ
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 300);
       },
       (progress) => {
         const percent = (progress.loaded / progress.total) * 100;
@@ -216,10 +241,34 @@ export default function CoffeeBeanScene() {
     // リサイズ対応
     const handleResize = () => {
       if (!container) return;
+
+      // リサイズ時に画面サイズを再判定
+      const currentIsMobile = window.innerWidth < 768;
+      const currentIsTablet =
+        window.innerWidth >= 768 && window.innerWidth < 1024;
+
+      // FOVを更新
+      const newFov = currentIsMobile ? 35 : currentIsTablet ? 32 : 30;
+      camera.fov = newFov;
+
+      // カメラのz位置を更新
+      const newCameraZ = currentIsMobile ? 10 : currentIsTablet ? 9 : 8;
+      camera.position.z = newCameraZ;
+
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
+
+      // lookAtも再設定
+      const targetY = -0.3;
+      camera.lookAt(0, targetY, 0);
+
       renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(
+        currentIsMobile ? 1 : Math.min(window.devicePixelRatio, 2)
+      );
+
+      // ScrollTriggerをリフレッシュ
+      ScrollTrigger.refresh();
     };
     window.addEventListener("resize", handleResize);
 

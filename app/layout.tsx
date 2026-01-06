@@ -10,7 +10,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Coffee Bean - Discover the World of Coffee",
-  description: "Learn about coffee beans, their origins, and why people love coffee",
+  description:
+    "Learn about coffee beans, their origins, and why people love coffee",
 };
 
 export default function RootLayout({

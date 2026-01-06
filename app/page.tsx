@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { IconCrop, IconHive, IconToast } from "./components/svg-assets";
 import CoffeeBeanScene from "./components/CoffeeBeanScene";
 
@@ -36,7 +37,7 @@ export default function Home() {
       {/* Origins Section */}
       <section className="bg-[#594a3c] flex flex-col items-center w-full px-6 md:px-16 py-28 relative z-10">
         <div className="flex flex-col items-start w-full max-w-[1280px]">
-          <div className="flex flex-col lg:flex-row gap-20 items-center w-full">
+          <div className="flex flex-col md:flex-row gap-20 items-center w-full">
             {/* Content */}
             <div className="flex flex-col gap-8 flex-1 relative z-20">
               <div className="flex flex-col gap-8">
@@ -95,7 +96,7 @@ export default function Home() {
             </div>
 
             {/* Image Container */}
-            <div className="flex-1 relative w-full h-[640px] rounded-[80px] overflow-hidden">
+            <div className="hidden md:flex flex-1 relative w-full min-h-[400px] md:h-[640px] rounded-[80px] overflow-hidden">
               <Image
                 src="/4d10d6064cf86817fb87f27f63253bfc83379840.png"
                 alt="Coffee Bean Origin Background"
@@ -115,9 +116,9 @@ export default function Home() {
         className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-28 relative z-10"
       >
         <div className="flex flex-col items-start w-full max-w-[1280px]">
-          <div className="flex flex-col lg:flex-row gap-20 items-center w-full h-[640px]">
+          <div className="flex flex-col md:flex-row gap-20 items-center w-full">
             {/* Image Container */}
-            <div className="flex-1 relative w-full h-full rounded-[80px] overflow-hidden">
+            <div className="hidden md:flex flex-1 relative w-full min-h-[400px] md:h-[640px] rounded-[80px] overflow-hidden">
               <Image
                 src="/371a5ff833e4781c4a0e60a4ac8eda7526428998.png"
                 alt="Coffee Culture Background"
@@ -161,17 +162,20 @@ export default function Home() {
             {/* 3Dコーヒー豆がこの上に重なります */}
 
             {/* Button - Bottom Center */}
-            <div className="absolute left-0 right-0 bottom-[100px] z-10 text-center">
-              <button className="border border-solid border-black px-6 py-3 text-black font-normal text-base hover:bg-black hover:text-white transition-colors">
+            <div className="absolute left-0 right-0 top-[100px] z-10 text-center">
+              <Link
+                href="/about"
+                className="inline-block border border-solid border-black px-6 py-3 text-black font-normal text-base hover:bg-black hover:text-white transition-colors"
+              >
                 About Two Beans
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20 relative z-10">
+      {/* <footer className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20 relative z-10">
         <div className="flex flex-col items-start w-full max-w-[1280px]">
           <div className="flex items-center justify-between w-full">
             <div className="h-[23px] w-[88px] text-white font-bold text-lg">
@@ -184,7 +188,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
