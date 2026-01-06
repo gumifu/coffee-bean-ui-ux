@@ -73,7 +73,7 @@ export default function CoffeeBeanScene() {
     scene.add(pointLight);
 
     // 影を受け取る平面を追加（コーヒー豆の真下）
-    const planeGeometry = new THREE.PlaneGeometry(20, 20);
+    const planeGeometry = new THREE.PlaneGeometry(6, 6);
     const planeMaterial = new THREE.ShadowMaterial({ opacity: 0.35 });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = -Math.PI / 2;
@@ -118,39 +118,63 @@ export default function CoffeeBeanScene() {
         model.rotation.y = 0; // 正面向き
         model.rotation.z = 0;
 
-        // --- 角度のアニメーション ---
+        // --- アニメーションの統合管理 (gsap.timeline) ---
 
-        // Originsセクション (30% - 50%)
-        // 右側の画像に合わせる角度
-        gsap.to(model.rotation, {
-          x: Math.PI / 2 - 0.1,
-          y: -0.1,
-          z: -0.2, // 右側に傾ける
+        // 1. カメラの動き (左右の構図変更)
+        const camTL = gsap.timeline({
           scrollTrigger: {
             trigger: "body",
-            start: "5% top",
-            end: "40% top",
+            start: "top top",
+            end: "bottom bottom",
             scrub: 1,
           },
         });
 
-        // Cultureセクション (60% - 80%)
-        // 左側の画像に合わせる角度
-        gsap.to(model.rotation, {
-          x: Math.PI / 2 + 0.1,
-          y: 0.2,
-          z: 0.25, // 左側に傾ける
+        camTL
+          .to(camera.position, { x: 0, duration: 2 }) // ヒーロー (中央)
+          .to(camera.position, { x: -2, duration: 3 }) // Origins (右側に配置 = カメラ左)
+          .to(camera.position, { x: 2, duration: 4 }) // Culture (左側に配置 = カメラ右)
+          .to(camera.position, { x: 0, duration: 3 }); // About Two Beans (中央に戻る)
+        // .to(camera.position, { x: 0, duration: 2 }); // 余韻 (フッター)
+
+        // 2. 豆の回転 (見せたい角度の切り替え)
+        const rotationTL = gsap.timeline({
           scrollTrigger: {
             trigger: "body",
-            start: "60% top",
-            end: "80% top",
+            start: "top top",
+            end: "bottom bottom",
             scrub: 1,
           },
         });
 
-        // --- 位置とカメラのアニメーション ---
+        rotationTL
+          .to(model.rotation, { x: 0.1, y: 0, z: 0, duration: 2 }) // ヒーロー (正面)
+          .to(model.rotation, {
+            x: Math.PI / 2 - 0.05,
+            y: -0.1,
+            z: -0.1, // zを抑えて酔いを軽減
+            duration: 3,
+          }) // Origins
+          .to(model.rotation, {
+            x: Math.PI / 2 + 0.1,
+            y: 0.2,
+            z: 0.15,
+            duration: 4,
+          }) // Culture
+          .to(model.rotation, {
+            x: Math.PI * 2,
+            y: 0,
+            z: 0,
+            duration: 3,
+          }); // About Two Beans (正面に戻る)
+        // .to(model.rotation, {
+        //   x: Math.PI * 2,
+        //   y: 0.1,
+        //   z: 0.1,
+        //   duration: 2,
+        // }); // ラスト (少し傾ける)
 
-        // 全体的なY軸の微調整
+        // 3. 全体的な浮遊感とスケール
         gsap.to(model.position, {
           y: 0.1,
           scrollTrigger: {
@@ -161,49 +185,13 @@ export default function CoffeeBeanScene() {
           },
         });
 
-        // カメラのX位置（左右移動）
-        // 1. Originsセクション（画像は右側） -> 豆を右へ（カメラを左へ）
-        gsap.to(camera.position, {
-          x: -4.8,
-          scrollTrigger: {
-            trigger: "body",
-            start: "30% top",
-            end: "50% top",
-            scrub: 1,
-          },
-        });
-
-        // 2. Cultureセクション（画像は左側） -> 豆を左へ（カメラを右へ）
-        gsap.to(camera.position, {
-          x: 4.8,
-          scrollTrigger: {
-            trigger: "body",
-            start: "60% top",
-            end: "80% top",
-            scrub: 1,
-          },
-        });
-
-        // カメラを元の位置に戻す（フッター付近）
-        gsap.to(camera.position, {
-          x: 0,
-          scrollTrigger: {
-            trigger: "body",
-            start: "85% top",
-            end: "100% top",
-            scrub: 1,
-          },
-        });
-
-        // スケールのアニメーション
-        const originalScale = model.scale.x;
         gsap.to(model.scale, {
-          x: originalScale * 0.85, // 少し小さくして画像に収める
-          y: originalScale * 0.85,
-          z: originalScale * 0.85,
+          x: scale * 0.5,
+          y: scale * 0.5,
+          z: scale * 0.5,
           scrollTrigger: {
             trigger: "body",
-            start: "30% top",
+            start: "5% top",
             end: "80% top",
             scrub: 1,
           },

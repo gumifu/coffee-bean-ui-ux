@@ -94,57 +94,38 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Image */}
+            {/* Image Container */}
             <div className="flex-1 relative w-full h-[640px] rounded-[80px] overflow-hidden">
               <Image
                 src="/4d10d6064cf86817fb87f27f63253bfc83379840.png"
-                alt="Coffee Bean"
+                alt="Coffee Bean Origin Background"
                 fill
                 className="object-cover rounded-[80px]"
               />
               <div className="absolute inset-0 bg-[rgba(153,153,153,0.6)] rounded-[80px]" />
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[310px] h-[470px]">
-                <div className="rotate-285">
-                  <div className="relative w-[432px] h-[206px]">
-                    <Image
-                      src="/e21170fb48e7371d8ac345590555cd83fe7d7b1a.png"
-                      alt="Coffee Bean Detail"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+              {/* 3Dコーヒー豆がこの上に重なります */}
             </div>
           </div>
         </div>
       </section>
 
       {/* Culture Section */}
-      <section className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-28 relative z-10">
+      <section
+        id="culture-section"
+        className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-28 relative z-10"
+      >
         <div className="flex flex-col items-start w-full max-w-[1280px]">
           <div className="flex flex-col lg:flex-row gap-20 items-center w-full h-[640px]">
-            {/* Image */}
+            {/* Image Container */}
             <div className="flex-1 relative w-full h-full rounded-[80px] overflow-hidden">
               <Image
                 src="/371a5ff833e4781c4a0e60a4ac8eda7526428998.png"
-                alt="Coffee Culture"
+                alt="Coffee Culture Background"
                 fill
                 className="object-cover rounded-[80px]"
               />
               <div className="absolute inset-0 bg-[rgba(153,153,153,0.6)] rounded-[80px]" />
-              <div className="absolute left-[103px] top-[102px] w-[394px] h-[477px]">
-                <div className="rotate-60">
-                  <div className="relative w-[432px] h-[206px]">
-                    <Image
-                      src="/e21170fb48e7371d8ac345590555cd83fe7d7b1a.png"
-                      alt="Coffee Bean Detail"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+              {/* 3Dコーヒー豆がこの上に重なります */}
             </div>
 
             {/* Content */}
@@ -165,6 +146,25 @@ export default function Home() {
                   world, coffee connects us to tradition and to each other.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Two Beans Section */}
+      <section
+        id="about-section"
+        className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 relative z-10"
+      >
+        <div className="flex items-start justify-center w-full max-w-[1280px]">
+          <div className="flex flex-col gap-2 h-[640px] items-center justify-center overflow-hidden rounded-[80px] w-full relative bg-linear-to-b from-[#f5f5dc] to-[#e8dcc0]">
+            {/* 3Dコーヒー豆がこの上に重なります */}
+
+            {/* Button - Bottom Center */}
+            <div className="absolute left-0 right-0 bottom-[100px] z-10 text-center">
+              <button className="border border-solid border-black px-6 py-3 text-black font-normal text-base hover:bg-black hover:text-white transition-colors">
+                About Two Beans
+              </button>
             </div>
           </div>
         </div>
