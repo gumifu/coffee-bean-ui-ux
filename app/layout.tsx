@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import ClientLayout from "./components/ClientLayout";
 
 const roboto = Roboto({
   weight: ["400", "600", "700"],
@@ -25,7 +26,7 @@ export default function RootLayout({
         className={`${roboto.variable} antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

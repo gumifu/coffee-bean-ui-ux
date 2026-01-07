@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { IconCrop, IconHive, IconToast } from "./components/svg-assets";
-import CoffeeBeanScene from "./components/CoffeeBeanScene";
 import Navbar from "./components/Navbar";
 
 export default function Home() {
@@ -10,9 +9,6 @@ export default function Home() {
     <div className="bg-[#594a3c] flex flex-col items-start relative min-h-screen w-full">
       {/* Navbar */}
       <Navbar />
-
-      {/* 3D Coffee Bean Scene - Fixed position, follows scroll */}
-      <CoffeeBeanScene />
 
       {/* Hero Section */}
       <section className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 relative z-10 mt-[72px]">

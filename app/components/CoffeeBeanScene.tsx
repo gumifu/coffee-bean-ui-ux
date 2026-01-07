@@ -113,11 +113,11 @@ export default function CoffeeBeanScene() {
 
         // モデルを中央に配置
         model.position.sub(center);
-        model.position.y = -0.5; // 少し下に配置して影に近づける
+        model.position.y = -0.9; // 影の平面と同じ高さに配置（最初と最後で重ねる）
 
         // スケール調整（画面サイズに応じて）
         const maxSize = Math.max(size.x, size.y, size.z);
-        const baseScale = 3 / maxSize;
+        const baseScale = (3 / maxSize) * 0.6; // 基本サイズを0.6倍に
         // モバイルでは少し小さくする
         const scale = isMobile ? baseScale * 0.9 : baseScale;
         model.scale.setScalar(scale);
@@ -196,7 +196,7 @@ export default function CoffeeBeanScene() {
 
         positionTL
           .to(model.position, { y: 0.1, duration: 9 }) // 途中までは浮かせたまま
-          .to(model.position, { y: -0.5, duration: 3 }); // 最後は初期位置の -0.5 に戻して影に付ける
+          .to(model.position, { y: -0.9, duration: 3 }); // 最後は影の平面と同じ高さ(-1.5)に戻して重ねる
 
         // 4. スケールのアニメーション (元の大きさに戻す)
         const scaleTL = gsap.timeline({
