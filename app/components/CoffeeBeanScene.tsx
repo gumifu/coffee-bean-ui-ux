@@ -132,9 +132,9 @@ export default function CoffeeBeanScene() {
 
         scene.add(model);
 
-        // モデルの初期角度を設定（割れ目が見えるように）
+        // モデルの初期角度を設定（割れ目が横になるように90度回転）
         model.rotation.x = 0.1; // わずかに前傾
-        model.rotation.y = 0; // 正面向き
+        model.rotation.y = Math.PI / 2; // 90度回転して割れ目を横に
         model.rotation.z = 0;
 
         // --- アニメーションの統合管理 (gsap.timeline) ---
@@ -169,7 +169,7 @@ export default function CoffeeBeanScene() {
         });
 
         rotationTL
-          .to(model.rotation, { x: 0.1, y: 0, z: 0, duration: 2 })
+          .to(model.rotation, { x: 0.1, y: Math.PI / 2, z: 0, duration: 2 }) // FV: 割れ目が横
           .to(model.rotation, {
             x: Math.PI / 2 - 0.05,
             y: -0.1,
@@ -182,7 +182,7 @@ export default function CoffeeBeanScene() {
             z: 0.15,
             duration: 4,
           })
-          .to(model.rotation, { x: Math.PI * 2, y: 0, z: 0, duration: 3 });
+          .to(model.rotation, { x: 0.1, y: Math.PI / 2, z: 0, duration: 3 }); // 最後: 割れ目が横
 
         // 3. 全体的な浮遊感と「影への着地」
         const positionTL = gsap.timeline({

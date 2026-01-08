@@ -44,12 +44,12 @@ export default function Navbar() {
     >
       <div className="flex h-[72px] items-center justify-between px-16 md:px-[64px] w-full max-w-[1408px]">
         <div className="flex items-center justify-between w-full">
-          <Link href="/" className="h-[25px] w-[116px]">
+          <Link href="/" className="h-[24px] w-[114px]">
             <Image
-              src="/logo.svg"
+              src="/header_logo.svg"
               alt="COFFEE"
-              width={116}
-              height={25}
+              width={114}
+              height={24}
               className="h-full w-auto"
             />
           </Link>
@@ -58,4 +58,3 @@ export default function Navbar() {
     </nav>
   );
 }
-

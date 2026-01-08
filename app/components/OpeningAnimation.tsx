@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 export default function OpeningAnimation() {
   const [isVisible, setIsVisible] = useState(true);
@@ -9,51 +10,42 @@ export default function OpeningAnimation() {
   const topRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
-  const spinnerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (
       !containerRef.current ||
       !topRef.current ||
       !bottomRef.current ||
-      !indicatorRef.current ||
-      !spinnerRef.current
+      !indicatorRef.current
     )
       return;
 
     // 初期状態を設定
-    gsap.set(indicatorRef.current, { scale: 0, opacity: 0 });
+    gsap.set(indicatorRef.current, { opacity: 0 });
     gsap.set(topRef.current, { y: 0 });
     gsap.set(bottomRef.current, { y: 0 });
     gsap.set(containerRef.current, { opacity: 1 });
 
-    // スピナーの回転アニメーション（継続）
-    gsap.to(spinnerRef.current, {
-      rotation: 360,
-      duration: 1,
-      repeat: -1,
-      ease: "none",
-      force3D: true, // GPUアクセラレーション
-    });
-
     const tl = gsap.timeline();
 
-    // インジケーターのアニメーション（短縮）
+    // ロゴのフェードインアニメーション
     tl.to(indicatorRef.current, {
-      scale: 1,
       opacity: 1,
       duration: 0.4,
       ease: "power1.out",
       force3D: true,
     })
-      .to(indicatorRef.current, {
-        scale: 1.05,
-        duration: 0.2,
-        yoyo: true,
-        repeat: 1,
-        ease: "power1.inOut",
-        force3D: true,
-      })
+      // ロゴのフェードアウトとカーテンが開くアニメーションを同時に実行
+      .to(
+        indicatorRef.current,
+        {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power1.in",
+          force3D: true,
+        },
+        "-=0.1"
+      )
       // 上下に開くアニメーション（短縮・軽量化）
       .to(
         topRef.current,
@@ -63,7 +55,7 @@ export default function OpeningAnimation() {
           ease: "power2.inOut",
           force3D: true,
         },
-        "-=0.1"
+        "<" // ロゴのフェードアウトと同時に実行
       )
       .to(
         bottomRef.current,
@@ -117,15 +109,18 @@ export default function OpeningAnimation() {
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div
           ref={indicatorRef}
-          className="flex flex-col items-center gap-4"
-          style={{ willChange: "transform, opacity" }}
+          className="flex items-center justify-center"
+          style={{ willChange: "opacity", opacity: 0 }}
         >
-          <div
-            ref={spinnerRef}
-            className="w-16 h-16 border-4 border-white border-t-transparent rounded-full"
-            style={{ willChange: "transform" }}
-          />
-          <p className="text-white font-semibold text-lg">COFFEE</p>
+          <div className="h-[24px] w-[114px]">
+            <Image
+              src="/footer_logo.svg"
+              alt="COFFEE"
+              width={114}
+              height={24}
+              className="h-full w-auto"
+            />
+          </div>
         </div>
       </div>
     </div>

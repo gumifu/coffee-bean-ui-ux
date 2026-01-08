@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #594a3c;
   --foreground: #171717;
 }
 
@@ -13,13 +13,38 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #594a3c;
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
+  background: #594a3c;
   color: var(--foreground);
   font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
+}
+
+/* 見出しフォント - Cormorant Garamond Bold */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-cormorant-garamond), serif;
+  font-weight: 700;
+}
+
+/* Coffee Belt Map - GSAPアニメーション用スタイル */
+.coffee-belt {
+  transform-origin: center center;
+  cursor: pointer;
+}
+
+.coffee-belt .coffee-belt-region {
+  fill: #8b4a2f;
+}
+
+/* オーバーレイ（黒幕） */
+.overlay {
+  transform-origin: center center;
+  pointer-events: none;
 }
