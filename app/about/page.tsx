@@ -99,6 +99,23 @@ export default function AboutPage() {
         }}
       >
         <div className="flex flex-col items-center max-w-[1280px] w-full gap-20">
+          {/* Section Title */}
+          <div className="flex flex-col gap-6 items-center text-center w-full">
+            <h2
+              className="font-bold text-[64px] leading-[1.2] text-white whitespace-nowrap"
+              style={{ fontFamily: "var(--font-cormorant-garamond)" }}
+            >
+              Arabica and Robusta
+            </h2>
+            <p className="font-bold text-[24px] leading-[1.2] text-white">
+              <span>Two main types</span>
+              <br aria-hidden="true" />
+              <span className="font-normal">
+                Each type brings its own character to the cup
+              </span>
+            </p>
+          </div>
+
           {/* Cards */}
           <div className="flex flex-col md:flex-row gap-8 md:gap-8 items-start w-full">
             {/* Arabica Card */}
@@ -269,18 +286,22 @@ export default function AboutPage() {
           </div>
 
           {/* Coffee Belt */}
-          <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col items-center w-full mt-[40px]">
             {/* Content Header */}
-            <div className="flex flex-col gap-4 items-center text-center mb-12">
-              <h2 className="font-bold text-[48px] md:text-[56px] leading-tight text-white">
+            <div className="flex flex-col gap-6 items-center text-center mb-12">
+              <h2
+                className="font-bold text-[64px] leading-[1.2] text-white whitespace-nowrap"
+                style={{ fontFamily: "var(--font-cormorant-garamond)" }}
+              >
                 Coffee Belt
               </h2>
-              <p className="font-normal text-lg leading-relaxed text-white max-w-2xl">
-                Within this region, two primary types of coffee thrive.
-              </p>
-              <p className="font-normal text-lg leading-relaxed text-white max-w-2xl">
-                Each variety contributes unique flavors and characteristics to
-                the coffee experience.
+              <p className="font-bold text-[24px] leading-[1.5] text-white">
+                <span>Two types grow in this region.</span>
+                <br aria-hidden="true" />
+                <span className="font-normal">
+                  Each variety contributes unique flavors and characteristics to
+                  the coffee experience.
+                </span>
               </p>
             </div>
 
