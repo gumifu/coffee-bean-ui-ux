@@ -74,6 +74,35 @@ export default function DesignSystemPage() {
                   <li><strong>Interactive Components:</strong> Coffee Belt map with hover/click interactions</li>
                 </ul>
               </div>
+              <div>
+                <h3 className="text-black font-semibold text-xl mb-3">Links</h3>
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-black font-semibold text-sm">GitHub:</span>
+                    <a
+                      href="https://github.com/gumifu/coffee-bean-ui-ux"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#594a3c] hover:underline text-sm truncate max-w-full"
+                      title="https://github.com/gumifu/coffee-bean-ui-ux"
+                    >
+                      https://github.com/gumifu/coffee-bean-ui-ux
+                    </a>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-black font-semibold text-sm">Figma:</span>
+                    <a
+                      href="https://www.figma.com/design/NyrYLIUkQhGnQcSxhTvIOV/coffee?node-id=0-1&t=ok7exVF7gJrZLQoy-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#594a3c] hover:underline text-sm truncate max-w-full"
+                      title="https://www.figma.com/design/NyrYLIUkQhGnQcSxhTvIOV/coffee?node-id=0-1&t=ok7exVF7gJrZLQoy-1"
+                    >
+                      https://www.figma.com/design/NyrYLIUkQhGnQcSxhTvIOV/coffee?node-id=0-1&t=ok7exVF7gJrZLQoy-1
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
