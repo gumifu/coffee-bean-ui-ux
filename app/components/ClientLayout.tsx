@@ -12,14 +12,14 @@ export default function ClientLayout({
 }) {
   const pathname = usePathname();
 
-  // Aboutページではコーヒー豆を非表示
-  const showCoffeeBean = pathname !== "/about";
+  // AboutページとDesign Systemページではコーヒー豆を非表示
+  const showCoffeeBean = pathname !== "/about" && pathname !== "/design-system";
 
   return (
     <>
       <OpeningAnimation />
       {/* 3D Coffee Bean Scene - ページ遷移アニメーションの影響を受けないように外に配置 */}
-      {showCoffeeBean && <CoffeeBeanScene />}
+      {showCoffeeBean && <CoffeeBeanScene pathname={pathname} />}
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={pathname}

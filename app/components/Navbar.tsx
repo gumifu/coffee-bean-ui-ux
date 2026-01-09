@@ -53,12 +53,20 @@ export default function Navbar() {
               className="h-full w-auto"
             />
           </Link>
-          <Link
-            href="/about"
-            className="text-white font-normal text-sm md:text-base hover:opacity-80 transition-opacity"
-          >
-            About Two Beans
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/about"
+              className="text-white font-normal text-sm md:text-base hover:opacity-80 transition-opacity"
+            >
+              About Two Beans
+            </Link>
+            <Link
+              href="/design-system"
+              className="text-white font-normal text-sm md:text-base hover:opacity-80 transition-opacity"
+            >
+              Design System
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

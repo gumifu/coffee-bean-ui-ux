@@ -11,7 +11,11 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function CoffeeBeanScene() {
+export default function CoffeeBeanScene({
+  pathname = "/",
+}: {
+  pathname?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const modelRef = useRef<THREE.Group | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
@@ -25,6 +29,7 @@ export default function CoffeeBeanScene() {
     // モバイル判定
     const isMobile = window.innerWidth < 768;
     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    const isDesignSystemPage = pathname === "/design-system";
 
     // シーンのセットアップ
     const scene = new THREE.Scene();
@@ -41,11 +46,16 @@ export default function CoffeeBeanScene() {
 
     // カメラのz位置を画面サイズに応じて調整
     const cameraZ = isMobile ? 10 : isTablet ? 9 : 8;
-    camera.position.set(0, 0, cameraZ);
+    // Design Systemページでは右端に配置し、下方向に調整
+    const cameraX = isDesignSystemPage ? 4 : 0;
+    const cameraY = isDesignSystemPage ? -1.5 : 0; // フッター下のコーヒー豆を見るために下に移動
+    camera.position.set(cameraX, cameraY, cameraZ);
 
     // About Two Beansボタンの位置にlookAtを設定
-    const targetY = -0.3; // ボタン位置に合わせたY座標
-    camera.lookAt(0, targetY, 0);
+    // Design Systemページではフッター下のコーヒー豆を見る
+    const targetY = isDesignSystemPage ? -2.5 : -0.3; // Design Systemページではフッター下、それ以外はボタン位置
+    const targetX = isDesignSystemPage ? 2 : 0; // Design Systemページでは右端
+    camera.lookAt(targetX, targetY, 0);
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({
@@ -116,6 +126,11 @@ export default function CoffeeBeanScene() {
         // 初期位置（FVセクションのみ120px上げる）
         const initialY = -0.9 + 120 / 1000; // 120px = 0.12のy座標
         model.position.y = initialY; // FVセクション: 120px上げた位置
+        // Design Systemページでは右端に配置し、フッター下あたりに配置
+        if (isDesignSystemPage) {
+          model.position.x = 2; // 右端に移動
+          model.position.y = -2.5; // フッター下あたりに配置（下に移動）
+        }
 
         // スケール調整（画面サイズに応じて）
         const maxSize = Math.max(size.x, size.y, size.z);
@@ -135,99 +150,108 @@ export default function CoffeeBeanScene() {
         scene.add(model);
 
         // モデルの初期角度を設定（割れ目が横になるように90度回転）
-        model.rotation.x = 0.1; // わずかに前傾
-        model.rotation.y = Math.PI / 2; // 90度回転して割れ目を横に
-        model.rotation.z = 0;
+        if (isDesignSystemPage) {
+          // Design Systemページでは追加で回転
+          model.rotation.x = 0.3; // より前傾
+          model.rotation.y = Math.PI / 2 + 0.5; // 90度 + 追加回転
+          model.rotation.z = 0.2; // 少し傾ける
+        } else {
+          model.rotation.x = 0.1; // わずかに前傾
+          model.rotation.y = Math.PI / 2; // 90度回転して割れ目を横に
+          model.rotation.z = 0;
+        }
 
         // --- アニメーションの統合管理 (gsap.timeline) ---
+        // Design Systemページではアニメーションを無効化
+        if (!isDesignSystemPage) {
+          // カメラの移動量を画面サイズに応じて調整
+          const cameraMoveAmount = isMobile ? 1.5 : isTablet ? 1.75 : 2;
 
-        // カメラの移動量を画面サイズに応じて調整
-        const cameraMoveAmount = isMobile ? 1.5 : isTablet ? 1.75 : 2;
+          // 1. カメラの動き (左右の構図変更)
+          const camTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1,
+            },
+          });
 
-        // 1. カメラの動き (左右の構図変更)
-        const camTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        });
+          camTL
+            .to(camera.position, { x: 0, duration: 2 }) // ヒーロー (中央)
+            .to(camera.position, { x: -cameraMoveAmount, duration: 3 }) // Origins (豆を右へ = カメラ左)
+            .to(camera.position, { x: cameraMoveAmount, duration: 4 }) // Culture (豆を左へ = カメラ右)
+            .to(camera.position, { x: 0, duration: 3 }); // Aboutセクションで中央へ
 
-        camTL
-          .to(camera.position, { x: 0, duration: 2 }) // ヒーロー (中央)
-          .to(camera.position, { x: -cameraMoveAmount, duration: 3 }) // Origins (豆を右へ = カメラ左)
-          .to(camera.position, { x: cameraMoveAmount, duration: 4 }) // Culture (豆を左へ = カメラ右)
-          .to(camera.position, { x: 0, duration: 3 }); // Aboutセクションで中央へ
+          // 2. 豆の回転 (見せたい角度の切り替え)
+          const rotationTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1,
+            },
+          });
 
-        // 2. 豆の回転 (見せたい角度の切り替え)
-        const rotationTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        });
+          rotationTL
+            .to(model.rotation, { x: 0.1, y: Math.PI / 2, z: 0, duration: 2 }) // FV: 割れ目が横
+            .to(model.rotation, {
+              x: Math.PI / 2 - 0.05,
+              y: -0.1,
+              z: -0.1,
+              duration: 3,
+            })
+            .to(model.rotation, {
+              x: Math.PI / 2 + 0.1,
+              y: 0.2,
+              z: 0.15,
+              duration: 4,
+            })
+            .to(model.rotation, { x: 0.1, y: Math.PI / 2, z: 0, duration: 3 }); // 最後: 割れ目が横
 
-        rotationTL
-          .to(model.rotation, { x: 0.1, y: Math.PI / 2, z: 0, duration: 2 }) // FV: 割れ目が横
-          .to(model.rotation, {
-            x: Math.PI / 2 - 0.05,
-            y: -0.1,
-            z: -0.1,
-            duration: 3,
-          })
-          .to(model.rotation, {
-            x: Math.PI / 2 + 0.1,
-            y: 0.2,
-            z: 0.15,
-            duration: 4,
-          })
-          .to(model.rotation, { x: 0.1, y: Math.PI / 2, z: 0, duration: 3 }); // 最後: 割れ目が横
+          // 3. 全体的な浮遊感と「影への着地」
+          const positionTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1,
+            },
+          });
 
-        // 3. 全体的な浮遊感と「影への着地」
-        const positionTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        });
+          // スマホでは80px上に移動、下部を120px下に下げる調整
+          // 80px上 = +0.08, 120px下 = -0.12, 最終的に-0.9 + 0.08 - 0.12 = -0.94
+          const finalY = isMobile ? -0.9 + 80 / 1000 - 120 / 1000 : -0.9; // スマホのみ位置調整
 
-        // スマホでは80px上に移動、下部を120px下に下げる調整
-        // 80px上 = +0.08, 120px下 = -0.12, 最終的に-0.9 + 0.08 - 0.12 = -0.94
-        const finalY = isMobile ? -0.9 + 80 / 1000 - 120 / 1000 : -0.9; // スマホのみ位置調整
+          positionTL
+            .to(model.position, { y: initialY, duration: 2 }) // FVセクション: 120px上げた位置を維持
+            .to(model.position, { y: 0.1, duration: 7 }) // 途中までは浮かせたまま
+            .to(model.position, { y: finalY, duration: 3 }); // 最後は影の平面と同じ高さに戻して重ねる（スマホは調整済み）
 
-        positionTL
-          .to(model.position, { y: initialY, duration: 2 }) // FVセクション: 120px上げた位置を維持
-          .to(model.position, { y: 0.1, duration: 7 }) // 途中までは浮かせたまま
-          .to(model.position, { y: finalY, duration: 3 }); // 最後は影の平面と同じ高さに戻して重ねる（スマホは調整済み）
+          // 4. スケールのアニメーション (元の大きさに戻す)
+          const scaleTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1,
+            },
+          });
 
-        // 4. スケールのアニメーション (元の大きさに戻す)
-        const scaleTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        });
+          scaleTL
+            .to(model.scale, {
+              x: scale * 0.5,
+              y: scale * 0.5,
+              z: scale * 0.5,
+              duration: 10,
+            }) // 途中で少し小さく
+            .to(model.scale, { x: scale, y: scale, z: scale, duration: 4 }); // 最後は元の大きさに戻す
 
-        scaleTL
-          .to(model.scale, {
-            x: scale * 0.5,
-            y: scale * 0.5,
-            z: scale * 0.5,
-            duration: 10,
-          }) // 途中で少し小さく
-          .to(model.scale, { x: scale, y: scale, z: scale, duration: 4 }); // 最後は元の大きさに戻す
-
-        // DOMが完全に読み込まれた後にScrollTriggerをリフレッシュ
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 300);
+          // DOMが完全に読み込まれた後にScrollTriggerをリフレッシュ
+          setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, 300);
+        }
       },
       (progress) => {
         const percent = (progress.loaded / progress.total) * 100;
@@ -241,6 +265,12 @@ export default function CoffeeBeanScene() {
     // アニメーションループ
     const animate = () => {
       requestAnimationFrame(animate);
+
+      // Design Systemページでは自動回転
+      if (isDesignSystemPage && modelRef.current) {
+        modelRef.current.rotation.y += 0.01; // Y軸を中心に回転
+      }
+
       renderer.render(scene, camera);
     };
     animate();
@@ -262,12 +292,22 @@ export default function CoffeeBeanScene() {
       const newCameraZ = currentIsMobile ? 10 : currentIsTablet ? 9 : 8;
       camera.position.z = newCameraZ;
 
+      // Design Systemページでは右端と下方向に調整
+      if (isDesignSystemPage) {
+        camera.position.x = 4;
+        camera.position.y = -1.5;
+      } else {
+        camera.position.x = 0;
+        camera.position.y = 0;
+      }
+
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
 
       // lookAtも再設定
-      const targetY = -0.3;
-      camera.lookAt(0, targetY, 0);
+      const targetY = isDesignSystemPage ? -2.5 : -0.3;
+      const targetX = isDesignSystemPage ? 2 : 0;
+      camera.lookAt(targetX, targetY, 0);
 
       renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.setPixelRatio(
@@ -300,12 +340,18 @@ export default function CoffeeBeanScene() {
       // ScrollTriggerのクリーンアップ
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, [pathname]);
+
+  // Design Systemページではスクロールに追従しない固定位置
+  const containerClassName =
+    pathname === "/design-system"
+      ? "fixed bottom-0 right-0 w-full h-full pointer-events-none"
+      : "fixed inset-0 w-full h-full pointer-events-none";
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 w-full h-full pointer-events-none"
+      className={containerClassName}
       style={{ zIndex: 15 }}
     />
   );
