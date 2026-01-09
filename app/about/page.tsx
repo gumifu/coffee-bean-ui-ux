@@ -1,13 +1,51 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mountain, Flower, Coffee, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../components/Navbar";
 import CoffeeBeltMap from "../components/CoffeeBeltMap";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function AboutPage() {
+  const bean1Ref = useRef<HTMLDivElement>(null);
+  const bean2Ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!bean1Ref.current || !bean2Ref.current || !sectionRef.current) return;
+
+    // パララックス効果: スクロールに応じて画像を上に移動
+    gsap.to(bean1Ref.current, {
+      y: -200,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    gsap.to(bean2Ref.current, {
+      y: -160,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,6 +58,7 @@ export default function AboutPage() {
 
       {/* Header Section */}
       <motion.section
+        ref={sectionRef}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -48,8 +87,11 @@ export default function AboutPage() {
           </div>
 
           {/* Coffee Beans Images */}
-          <div className="absolute left-1/2 top-[190px] md:top-[240px] lg:top-[282px] translate-x-[-50%] flex gap-[20px] md:gap-[35px] lg:gap-[54.177px] items-end justify-center">
-            <div className="h-[120px] md:h-[180px] lg:h-[249.5px] relative shrink-0 w-[85px] md:w-[130px] lg:w-[175.363px] overflow-hidden pointer-events-none">
+          <div className="absolute left-1/2 top-[300px] md:top-[300px] lg:top-[400px] translate-x-[-50%] flex gap-[20px] md:gap-[35px] lg:gap-[54.177px] items-end justify-center">
+            <div
+              ref={bean1Ref}
+              className="h-[120px] md:h-[180px] lg:h-[249.5px] relative shrink-0 w-[85px] md:w-[130px] lg:w-[175.363px] overflow-hidden pointer-events-none"
+            >
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <img
                   src="/d63578138e307e5f077acc57ace1289c70eed5a4.png"
@@ -65,7 +107,10 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-            <div className="h-[115px] md:h-[175px] lg:h-[239.52px] relative shrink-0 w-[93px] md:w-[140px] lg:w-[192.471px] overflow-hidden pointer-events-none">
+            <div
+              ref={bean2Ref}
+              className="h-[115px] md:h-[175px] lg:h-[239.52px] relative shrink-0 w-[93px] md:w-[140px] lg:w-[192.471px] overflow-hidden pointer-events-none"
+            >
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <img
                   src="/d63578138e307e5f077acc57ace1289c70eed5a4.png"

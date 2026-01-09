@@ -35,7 +35,7 @@ export default function CoffeeBeltMap() {
   return (
     <div className="relative w-full aspect-1143/522 group">
       <Image
-        src="/map-item.webp"
+        src="/map_item.webp"
         alt="Coffee Belt Map"
         fill
         className="object-contain"
@@ -44,7 +44,8 @@ export default function CoffeeBeltMap() {
       <button
         ref={infoButtonRef}
         onClick={() => setIsInfoOpen(!isInfoOpen)}
-        className="md:hidden absolute bottom-4 left-0 bg-white/90 backdrop-blur-sm rounded-[4px] p-2 shadow-lg flex items-center justify-center z-10"
+        className="md:hidden absolute bottom-4 left-0 rounded-[4px] p-2 shadow-lg flex items-center justify-center z-10"
+        style={{ backgroundColor: "#F7EBD8" }}
         aria-label="Show coffee belt information"
       >
         <Info size={20} className="text-[#594a3c]" />
@@ -52,14 +53,20 @@ export default function CoffeeBeltMap() {
       {/* Info Section - 左下に配置 */}
       <div
         ref={infoSectionRef}
-        className={`absolute bottom-4 left-0 flex gap-2 md:gap-3 items-start bg-white/90 backdrop-blur-sm rounded-[4px] p-3 md:p-4 shadow-lg transition-opacity duration-300 max-w-[320px] md:max-w-[480px] z-10 ${
+        className={`absolute bottom-4 left-0 flex flex-col gap-2 md:gap-3 rounded-[4px] p-3 md:p-4 shadow-lg transition-opacity duration-300 max-w-[320px] md:max-w-[480px] z-10 ${
           isInfoOpen
             ? "opacity-100"
             : "opacity-0 pointer-events-none md:opacity-0 md:pointer-events-auto md:group-hover:opacity-100"
         }`}
+        style={{ backgroundColor: "#F7EBD8" }}
       >
-        <Info size={16} className="w-4 h-4 shrink-0 text-[#594a3c] mt-0.5" />
-        <p className="font-normal text-[16px] leading-relaxed text-[#594a3c]">
+        <div className="flex gap-2 md:gap-3 items-start">
+          <Info size={16} className="w-4 h-4 shrink-0 text-[#594a3c] mt-0.5" />
+          <h3 className="font-bold text-[16px] text-[#594a3c]">
+            About Coffee belt
+          </h3>
+        </div>
+        <p className="font-normal text-[16px] leading-relaxed text-[#594a3c] pl-6 md:pl-7">
           The Coffee Belt is a region spanning 25 degrees north and south of the
           equator, ideal for coffee cultivation.
         </p>
