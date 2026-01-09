@@ -23,11 +23,11 @@ export default function AboutPage() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 mt-[72px]"
+        className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-16 mt-[72px]"
       >
-        <div className="bg-[#faf9ef] flex flex-col gap-[8px] h-[640px] items-center justify-center overflow-hidden relative rounded-[80px] shrink-0 w-full max-w-[1280px]">
+        <div className="bg-[#faf9ef] flex flex-col gap-[8px] h-[400px] md:h-[500px] lg:h-[640px] items-center justify-center overflow-hidden relative rounded-[40px] md:rounded-[60px] lg:rounded-[80px] shrink-0 w-full max-w-[1280px]">
           {/* Text Content */}
-          <div className="absolute left-1/2 top-[53px] translate-x-[-50%] flex flex-col items-center text-center">
+          <div className="absolute left-1/2 top-[30px] md:top-[40px] lg:top-[53px] translate-x-[-50%] flex flex-col items-center text-center px-6 md:px-8 lg:px-12">
             <div
               className="flex flex-col font-bold leading-0 text-center"
               style={{
@@ -35,9 +35,11 @@ export default function AboutPage() {
                 color: "#616161",
               }}
             >
-              <p className="leading-[70px]">
-                <span className="text-[40px]">Introduction</span>
-                <span className="text-[64px]">
+              <p className="leading-[40px] md:leading-[50px] lg:leading-[70px]">
+                <span className="text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap">
+                  Introduction
+                </span>
+                <span className="text-[32px] md:text-[40px] lg:text-[64px] whitespace-nowrap">
                   <br aria-hidden="true" />
                   Arabica and Robusta
                 </span>
@@ -46,8 +48,8 @@ export default function AboutPage() {
           </div>
 
           {/* Coffee Beans Images */}
-          <div className="absolute left-1/2 top-[242px] translate-x-[-50%] flex gap-[54.177px] items-end justify-center">
-            <div className="h-[249.5px] relative shrink-0 w-[175.363px] overflow-hidden pointer-events-none">
+          <div className="absolute left-1/2 top-[190px] md:top-[240px] lg:top-[282px] translate-x-[-50%] flex gap-[20px] md:gap-[35px] lg:gap-[54.177px] items-end justify-center">
+            <div className="h-[120px] md:h-[180px] lg:h-[249.5px] relative shrink-0 w-[85px] md:w-[130px] lg:w-[175.363px] overflow-hidden pointer-events-none">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <img
                   src="/d63578138e307e5f077acc57ace1289c70eed5a4.png"
@@ -63,7 +65,7 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-            <div className="h-[239.52px] relative shrink-0 w-[192.471px] overflow-hidden pointer-events-none">
+            <div className="h-[115px] md:h-[175px] lg:h-[239.52px] relative shrink-0 w-[93px] md:w-[140px] lg:w-[192.471px] overflow-hidden pointer-events-none">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <img
                   src="/d63578138e307e5f077acc57ace1289c70eed5a4.png"
@@ -89,7 +91,7 @@ export default function AboutPage() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col items-center w-full px-6 md:px-16 py-20 md:py-28 relative"
+        className="flex flex-col items-center w-full px-6 md:px-16 py-16 relative"
         style={{
           backgroundImage: "url('/bg_image.webp')",
           backgroundRepeat: "repeat",
@@ -98,16 +100,16 @@ export default function AboutPage() {
           backgroundColor: "#faf9ef",
         }}
       >
-        <div className="flex flex-col items-center max-w-[1280px] w-full gap-20">
+        <div className="flex flex-col items-center max-w-[1280px] w-full gap-12">
           {/* Section Title */}
-          <div className="flex flex-col gap-6 items-center text-center w-full">
+          <div className="flex flex-col gap-4 md:gap-6 items-center text-center w-full px-4">
             <h2
-              className="font-bold text-[64px] leading-[1.2] text-white whitespace-nowrap"
+              className="font-bold text-[32px] md:text-[40px] lg:text-[64px] leading-[1.2] text-white"
               style={{ fontFamily: "var(--font-cormorant-garamond)" }}
             >
               Arabica and Robusta
             </h2>
-            <p className="font-bold text-[24px] leading-[1.2] text-white">
+            <p className="font-bold text-[16px] md:text-[20px] lg:text-[24px] leading-[1.2] text-white">
               <span>Two main types</span>
               <br aria-hidden="true" />
               <span className="font-normal">
@@ -124,17 +126,17 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-[#faf9ef] border border-solid border-black flex flex-col items-start overflow-hidden rounded-[80px] w-full md:flex-1"
+              className="bg-[#faf9ef] border border-solid border-black flex flex-col items-start overflow-hidden rounded-[40px] md:rounded-[60px] lg:rounded-[80px] w-full md:flex-1"
             >
-              <div className="flex flex-col items-start px-6 md:px-12 py-12 md:py-20 w-full">
-                <div className="flex flex-col gap-6 items-start w-full">
-                  <h3 className="font-semibold text-[40px] leading-relaxed text-black">
+              <div className="flex flex-col items-start px-6 md:px-10 lg:px-12 py-8 md:py-12 lg:py-20 w-full">
+                <div className="flex flex-col gap-4 md:gap-6 items-start w-full">
+                  <h3 className="font-semibold text-[28px] md:text-[32px] lg:text-[40px] leading-relaxed text-black">
                     Arabica
                   </h3>
 
                   {/* UI Copy */}
                   <div className="flex flex-col gap-1">
-                    <p className="font-bold text-[20px] leading-tight text-black">
+                    <p className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-tight text-black">
                       Smooth and aromatic
                     </p>
                     <p className="font-normal text-base leading-relaxed text-black">
@@ -189,7 +191,7 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col h-[300px] items-center justify-end relative w-full">
+              <div className="flex flex-col h-[200px] md:h-[250px] lg:h-[300px] items-center justify-end relative w-full">
                 <div className="relative w-full h-full">
                   <Image
                     src="/216b34d9806cdc994789f03549d5f779fca7a73c.png"
@@ -207,17 +209,17 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-[#faf9ef] border border-solid border-black flex flex-col items-start overflow-hidden rounded-[80px] w-full md:flex-1"
+              className="bg-[#faf9ef] border border-solid border-black flex flex-col items-start overflow-hidden rounded-[40px] md:rounded-[60px] lg:rounded-[80px] w-full md:flex-1"
             >
-              <div className="flex flex-col items-start px-6 md:px-12 py-12 md:py-20 w-full">
-                <div className="flex flex-col gap-6 items-start w-full">
-                  <h3 className="font-semibold text-[40px] leading-relaxed text-black">
+              <div className="flex flex-col items-start px-6 md:px-10 lg:px-12 py-8 md:py-12 lg:py-20 w-full">
+                <div className="flex flex-col gap-4 md:gap-6 items-start w-full">
+                  <h3 className="font-semibold text-[28px] md:text-[32px] lg:text-[40px] leading-relaxed text-black">
                     Robusta
                   </h3>
 
                   {/* UI Copy */}
                   <div className="flex flex-col gap-1">
-                    <p className="font-bold text-[20px] leading-tight text-black">
+                    <p className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-tight text-black">
                       Bold and powerful
                     </p>
                     <p className="font-normal text-base leading-relaxed text-black">
@@ -272,7 +274,7 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col h-[300px] items-center justify-end relative w-full">
+              <div className="flex flex-col h-[200px] md:h-[250px] lg:h-[300px] items-center justify-end relative w-full">
                 <div className="relative w-full h-full">
                   <Image
                     src="/c5f8246aa367081ff392e01baec4c12de097fab5.png"
@@ -288,14 +290,14 @@ export default function AboutPage() {
           {/* Coffee Belt */}
           <div className="flex flex-col items-center w-full mt-[40px]">
             {/* Content Header */}
-            <div className="flex flex-col gap-6 items-center text-center mb-12">
+            <div className="flex flex-col gap-4 md:gap-6 items-center text-center mb-8 md:mb-12 px-4">
               <h2
-                className="font-bold text-[64px] leading-[1.2] text-white whitespace-nowrap"
+                className="font-bold text-[32px] md:text-[40px] lg:text-[64px] leading-[1.2] text-white"
                 style={{ fontFamily: "var(--font-cormorant-garamond)" }}
               >
                 Coffee Belt
               </h2>
-              <p className="font-bold text-[24px] leading-[1.5] text-white">
+              <p className="font-bold text-[16px] md:text-[20px] lg:text-[24px] leading-[1.5] text-white">
                 <span>Two types grow in this region.</span>
                 <br aria-hidden="true" />
                 <span className="font-normal">
@@ -306,7 +308,7 @@ export default function AboutPage() {
             </div>
 
             {/* Map Container */}
-            <div className="bg-[#faf9ef] rounded-[80px] p-8 md:p-16 w-full relative overflow-hidden">
+            <div className="bg-[#faf9ef] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] p-4 md:p-8 lg:p-16 w-full relative overflow-hidden">
               <CoffeeBeltMap />
             </div>
           </div>
@@ -319,24 +321,24 @@ export default function AboutPage() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-20"
+        className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-16"
       >
-        <div className="flex flex-col items-start max-w-[1280px] w-full">
-          <div className="flex items-center justify-between w-full">
-            <Link href="/" className="h-[24px] w-[114px]">
-              <Image
-                src="/footer_logo.svg"
-                alt="COFFEE"
-                width={114}
-                height={24}
-                className="h-full w-auto"
-              />
-            </Link>
-            <div className="flex items-center">
-              <p className="font-normal text-sm text-white">
-                © 2026 UI/UX Class Coffee. All rights reserved
-              </p>
-            </div>
+        <div className="flex flex-col items-center justify-center w-full max-w-[1280px] gap-4">
+          <Link href="/" className="h-[24px] w-[114px]">
+            <Image
+              src="/footer_logo.svg"
+              alt="COFFEE"
+              width={114}
+              height={24}
+              className="h-full w-auto"
+            />
+          </Link>
+          <div className="flex items-center justify-center">
+            <p className="font-normal text-xs md:text-sm text-white text-center">
+              © 2026 UI/UX Class Coffee.
+              <br className="md:hidden" />
+              All rights reserved
+            </p>
           </div>
         </div>
       </motion.footer>

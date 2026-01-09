@@ -42,7 +42,7 @@ export default function Navbar() {
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="flex h-[72px] items-center justify-between px-16 md:px-[64px] w-full max-w-[1408px]">
+      <div className="flex h-[72px] items-center justify-between px-6 w-full max-w-[1408px]">
         <div className="flex items-center justify-between w-full">
           <Link href="/" className="h-[24px] w-[114px]">
             <Image
@@ -52,6 +52,12 @@ export default function Navbar() {
               height={24}
               className="h-full w-auto"
             />
+          </Link>
+          <Link
+            href="/about"
+            className="text-white font-normal text-sm md:text-base hover:opacity-80 transition-opacity"
+          >
+            About Two Beans
           </Link>
         </div>
       </div>

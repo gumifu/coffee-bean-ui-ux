@@ -13,11 +13,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 relative z-10 mt-[72px]">
         <div className="flex items-start justify-center w-full max-w-[1280px]">
-          <div className="flex flex-col gap-2 h-[640px] items-center justify-center overflow-hidden rounded-[80px] w-full relative bg-[#faf9ef]">
+          <div className="flex flex-col gap-2 h-[400px] md:h-[500px] lg:h-[640px] items-center justify-center overflow-hidden rounded-[40px] md:rounded-[60px] lg:rounded-[80px] w-full relative bg-[#faf9ef]">
             {/* Title - Center Top */}
-            <div className="absolute left-0 right-0 top-[60px] md:top-[80px] z-10 text-center">
+            <div className="absolute left-0 right-0 top-[40px] md:top-[60px] lg:top-[80px] z-10 text-center px-4">
               <h1
-                className="font-bold text-[48px] md:text-[56px] leading-tight"
+                className="font-bold text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] leading-tight"
                 style={{
                   fontFamily: "var(--font-cormorant-garamond)",
                   color: "#616161",
@@ -146,10 +146,10 @@ export default function Home() {
       {/* About Two Beans Section */}
       <section
         id="about-section"
-        className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 py-20 relative z-10"
+        className="bg-[#594a3c] flex flex-col items-center justify-center w-full px-6 md:px-16 pt-20 pb-6 md:pb-16 relative z-10"
       >
         <div className="flex items-start justify-center w-full max-w-[1280px]">
-          <div className="flex flex-col gap-2 h-[640px] items-center justify-center overflow-hidden rounded-[80px] w-full relative bg-linear-to-b from-[#f5f5dc] to-[#e8dcc0]">
+          <div className="flex flex-col gap-2 h-[320px] md:h-[640px] items-center justify-center overflow-hidden rounded-[80px] w-full relative bg-linear-to-b from-[#f5f5dc] to-[#FAF9EF]">
             {/* 3Dコーヒー豆がこの上に重なります */}
 
             {/* Button - Bottom Center */}

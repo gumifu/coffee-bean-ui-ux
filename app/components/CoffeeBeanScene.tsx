@@ -113,7 +113,9 @@ export default function CoffeeBeanScene() {
 
         // モデルを中央に配置
         model.position.sub(center);
-        model.position.y = -0.9; // 影の平面と同じ高さに配置（最初と最後で重ねる）
+        // 初期位置（FVセクションのみ120px上げる）
+        const initialY = -0.9 + 120 / 1000; // 120px = 0.12のy座標
+        model.position.y = initialY; // FVセクション: 120px上げた位置
 
         // スケール調整（画面サイズに応じて）
         const maxSize = Math.max(size.x, size.y, size.z);
@@ -194,9 +196,14 @@ export default function CoffeeBeanScene() {
           },
         });
 
+        // スマホでは80px上に移動、下部を120px下に下げる調整
+        // 80px上 = +0.08, 120px下 = -0.12, 最終的に-0.9 + 0.08 - 0.12 = -0.94
+        const finalY = isMobile ? -0.9 + 80 / 1000 - 120 / 1000 : -0.9; // スマホのみ位置調整
+
         positionTL
-          .to(model.position, { y: 0.1, duration: 9 }) // 途中までは浮かせたまま
-          .to(model.position, { y: -0.9, duration: 3 }); // 最後は影の平面と同じ高さ(-1.5)に戻して重ねる
+          .to(model.position, { y: initialY, duration: 2 }) // FVセクション: 120px上げた位置を維持
+          .to(model.position, { y: 0.1, duration: 7 }) // 途中までは浮かせたまま
+          .to(model.position, { y: finalY, duration: 3 }); // 最後は影の平面と同じ高さに戻して重ねる（スマホは調整済み）
 
         // 4. スケールのアニメーション (元の大きさに戻す)
         const scaleTL = gsap.timeline({
