@@ -44,12 +44,12 @@ export default function Navbar() {
     >
       <div className="flex h-[72px] items-center justify-between px-6 w-full max-w-[1408px]">
         <div className="flex items-center justify-between w-full">
-          <Link href="/" className="h-[24px] w-[114px]">
+          <Link href="/" className="h-[28px] w-[117px]">
             <Image
-              src="/header_logo.svg"
+              src="/logo.svg"
               alt="COFFEE"
-              width={114}
-              height={24}
+              width={117}
+              height={28}
               className="h-full w-auto"
             />
           </Link>

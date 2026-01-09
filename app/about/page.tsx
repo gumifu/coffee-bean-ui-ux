@@ -369,12 +369,12 @@ export default function AboutPage() {
         className="bg-[#94887d] flex flex-col items-center w-full px-6 md:px-16 py-16"
       >
         <div className="flex flex-col items-center justify-center w-full max-w-[1280px] gap-4">
-          <Link href="/" className="h-[24px] w-[114px]">
+          <Link href="/" className="h-[28px] w-[117px]">
             <Image
-              src="/footer_logo.svg"
+              src="/logo.svg"
               alt="COFFEE"
-              width={114}
-              height={24}
+              width={117}
+              height={28}
               className="h-full w-auto"
             />
           </Link>

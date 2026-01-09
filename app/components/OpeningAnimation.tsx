@@ -20,22 +20,16 @@ export default function OpeningAnimation() {
     )
       return;
 
-    // 初期状態を設定
-    gsap.set(indicatorRef.current, { opacity: 0 });
+    // 初期状態を設定（ロゴは最初から表示）
+    gsap.set(indicatorRef.current, { opacity: 1 });
     gsap.set(topRef.current, { y: 0 });
     gsap.set(bottomRef.current, { y: 0 });
     gsap.set(containerRef.current, { opacity: 1 });
 
     const tl = gsap.timeline();
 
-    // ロゴのフェードインアニメーション
-    tl.to(indicatorRef.current, {
-      opacity: 1,
-      duration: 0.4,
-      ease: "power1.out",
-      force3D: true,
-    })
-      // ロゴのフェードアウトとカーテンが開くアニメーションを同時に実行
+    // 現在のタイミング（約0.4秒後）でロゴのフェードアウトとカーテンが開くアニメーションを同時に実行
+    tl.delay(0.4)
       .to(
         indicatorRef.current,
         {
@@ -44,7 +38,7 @@ export default function OpeningAnimation() {
           ease: "power1.in",
           force3D: true,
         },
-        "-=0.1"
+        "<"
       )
       // 上下に開くアニメーション（短縮・軽量化）
       .to(
@@ -94,14 +88,14 @@ export default function OpeningAnimation() {
       {/* 上部カーテン */}
       <div
         ref={topRef}
-        className="absolute top-0 left-0 right-0 h-1/2 bg-[#241501] z-10"
+        className="absolute top-0 left-0 right-0 h-1/2 bg-[#594A3C] z-10"
         style={{ willChange: "transform" }}
       />
 
       {/* 下部カーテン */}
       <div
         ref={bottomRef}
-        className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#241501] z-10"
+        className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#594A3C] z-10"
         style={{ willChange: "transform" }}
       />
 
@@ -110,14 +104,14 @@ export default function OpeningAnimation() {
         <div
           ref={indicatorRef}
           className="flex items-center justify-center"
-          style={{ willChange: "opacity", opacity: 0 }}
+          style={{ willChange: "opacity", opacity: 1 }}
         >
-          <div className="h-[24px] w-[114px]">
+          <div className="h-[28px] w-[117px]">
             <Image
-              src="/footer_logo.svg"
+              src="/logo.svg"
               alt="COFFEE"
-              width={114}
-              height={24}
+              width={117}
+              height={28}
               className="h-full w-auto"
             />
           </div>
@@ -126,4 +120,3 @@ export default function OpeningAnimation() {
     </div>
   );
 }
-

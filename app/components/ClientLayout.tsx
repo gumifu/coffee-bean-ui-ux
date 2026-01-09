@@ -16,7 +16,7 @@ export default function ClientLayout({
   const showCoffeeBean = pathname !== "/about" && pathname !== "/design-system";
 
   return (
-    <>
+    <div className="bg-[#594a3c] min-h-screen">
       <OpeningAnimation />
       {/* 3D Coffee Bean Scene - ページ遷移アニメーションの影響を受けないように外に配置 */}
       {showCoffeeBean && <CoffeeBeanScene pathname={pathname} />}
@@ -35,6 +35,6 @@ export default function ClientLayout({
           {children}
         </motion.div>
       </AnimatePresence>
-    </>
+    </div>
   );
 }

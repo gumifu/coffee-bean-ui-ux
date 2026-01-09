@@ -27,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-[#594a3c]">
       <body
-        className={`${roboto.variable} ${cormorantGaramond.variable} antialiased`}
+        className={`${roboto.variable} ${cormorantGaramond.variable} antialiased bg-[#594a3c]`}
         suppressHydrationWarning
       >
         <ClientLayout>{children}</ClientLayout>

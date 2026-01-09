@@ -71,6 +71,7 @@ export default function DesignSystemPage() {
                   <li><strong>3D Graphics:</strong> Three.js-powered interactive coffee bean model with scroll-triggered animations</li>
                   <li><strong>Parallax Effects:</strong> Smooth parallax scrolling on coffee bean images</li>
                   <li><strong>Page Animations:</strong> Custom opening animation and smooth page transitions</li>
+                  <li><strong>Page Transition Animation:</strong> Smooth page transitions using Framer Motion with brown (#594A3C) background. The opening animation features a logo display that fades out, followed by curtains opening from top and bottom, creating an elegant transition effect.</li>
                   <li><strong>Interactive Components:</strong> Coffee Belt map with hover/click interactions</li>
                 </ul>
               </div>
@@ -102,6 +103,49 @@ export default function DesignSystemPage() {
                     </a>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Logo Section */}
+          <section className="mb-20">
+            <h2
+              className="font-bold text-[32px] md:text-[40px] text-white mb-8"
+              style={{ fontFamily: "var(--font-cormorant-garamond)" }}
+            >
+              Logo
+            </h2>
+            <div className="bg-[#faf9ef] rounded-lg p-8 md:p-12 space-y-6">
+              <div>
+                <h3 className="text-black font-semibold text-xl mb-4">Logo</h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-[#594a3c] p-4 rounded-lg">
+                    <Image
+                      src="/logo.svg"
+                      alt="Logo"
+                      width={117}
+                      height={28}
+                      className="h-auto"
+                    />
+                  </div>
+                </div>
+                <p className="text-black text-sm">File: /public/logo.svg</p>
+              </div>
+              <div>
+                <h3 className="text-black font-semibold text-xl mb-4">Favicon</h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-[#594a3c] p-4 rounded-lg">
+                    <Image
+                      src="/favicon.svg"
+                      alt="Favicon"
+                      width={32}
+                      height={32}
+                      className="h-auto"
+                    />
+                  </div>
+                </div>
+                <p className="text-black text-sm mb-2">File: /public/favicon.svg</p>
+                <p className="text-black text-sm">File: /app/favicon.ico</p>
               </div>
             </div>
           </section>
@@ -261,12 +305,12 @@ export default function DesignSystemPage() {
                   <h4 className="text-white/80 font-medium mb-2 text-sm">Footer</h4>
                   <div className="bg-[#94887d] rounded-lg p-8 border border-white/20">
                     <div className="flex flex-col items-center justify-center w-full gap-4">
-                      <Link href="/" className="h-[24px] w-[114px]">
+                      <Link href="/" className="h-[28px] w-[117px]">
                         <Image
-                          src="/footer_logo.svg"
+                          src="/logo.svg"
                           alt="COFFEE"
-                          width={114}
-                          height={24}
+                          width={117}
+                          height={28}
                           className="h-full w-auto"
                         />
                       </Link>
@@ -289,9 +333,13 @@ export default function DesignSystemPage() {
               <div className="bg-[#faf9ef] rounded-lg p-8">
                 <Link
                   href="/about"
-                  className="inline-block bg-[#594a3c] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-80 transition-opacity"
+                  className="inline-flex items-center gap-2 border border-solid border-black px-6 py-3 text-black font-normal text-base hover:bg-black hover:text-white transition-colors group"
                 >
-                  About Two Beans
+                  <span>About Two Beans</span>
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
                 </Link>
               </div>
             </div>
